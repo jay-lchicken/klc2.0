@@ -13,7 +13,7 @@ const ParallaxHeader = () => {
   // Transform values for parallax effect
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0.3]);
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 2]);
   
   return (
     <div 
