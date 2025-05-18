@@ -3,9 +3,9 @@ import Image from "next/image";
 import { motion, useScroll, useTransform, useInView, useAnimation } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { ThumbsUp, GraduationCap, Speech, Lightbulb, LaptopMinimalCheck, Ear } from 'lucide-react';
-import NavBar from "../components/navbar";
+import NavigationHome from "../components/NavigationHome";
 import EntryAnimation from "../components/EntryAnimation";
-
+import ParallaxHeader from "@/components/parralax";
 const Timeline = () => {
   const timelineRef = useRef(null);
   const isInView = useInView(timelineRef, { once: false, amount: 0.2 });
@@ -73,7 +73,7 @@ const StatCard = ({ icon, target, suffix, description }) => {
   useEffect(() => {
     if (isInView && !counted) {
       controls.start({ scale: 1, opacity: 1 });
-      const duration = 2000;
+      const duration = 1200;
       const interval = 30;
       const steps = duration / interval;
       const increment = target / steps;
@@ -96,11 +96,11 @@ const StatCard = ({ icon, target, suffix, description }) => {
   return (
     <motion.div 
       ref={cardRef}
-      initial={{ scale: 0.95, opacity: 0 }}
+      initial={{ scale: 1, opacity: 0 }}
       animate={controls}
       whileHover={{ scale: 1.02 }}
       transition={{ duration: 0.5 }}
-      className="flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 bg-white rounded-2xl shadow-lg min-h-[180px] border-t-4 border-blue-500 mt-4 w-full"
+      className="flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 bg-white rounded-2xl shadow-lg min-h-[270px] max-h-[270px]  border-t-4 border-blue-500 mt-4 w-full"
     >
       <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center m-2 border-2 border-blue-500">
         {icon}
@@ -165,10 +165,10 @@ export default function Home() {
       
       {showContent && (
         <>
-          <NavBar sectionRefs={[homeRef, aboutRef, timelineRef, contactRef]} />
-
-          <header ref={homeRef} id="home" className="relative text-center text-white w-full px-4 sm:w-[85%] z-10 pt-4 sm:pt-8">
-            <div className="relative w-full overflow-hidden rounded-xl sm:rounded-3xl">
+          
+          <NavigationHome sectionRefs={[homeRef, aboutRef, timelineRef, contactRef]} />
+          <header ref={homeRef} id="home" className="relative text-center text-white w-full px-4 sm:w-[85%] z-10 pt-16 sm:pt-20">
+            {/* <div className="relative w-full overflow-hidden rounded-xl sm:rounded-3xl">
               <Image
                 className="header w-full h-auto blur-md"
                 src="/Screenshot%202025-04-28%20at%207.27.21%E2%80%AFAM.png"
@@ -195,10 +195,11 @@ export default function Home() {
                   Allowing all students to learn coding for free
                 </motion.p>
               </div>
-            </div>
+            </div> */}
+            <ParallaxHeader />
           </header>
           
-          <ScrollReveal className="flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-8 z-10 w-full px-4 sm:w-[85%]">
+          <ScrollReveal className="flex grid-cols-1 md:grid-cols-2 items-center justify-between gap-4 sm:gap-8 z-10 w-full px-4 sm:w-[85%]">
             <StatCard 
               icon={<ThumbsUp size={28} className="text-blue-500" strokeWidth={2.5} />}
               target={70}

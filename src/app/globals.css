@@ -44,7 +44,7 @@ body {
 }
 
 .letter_container {
-  font-size: 15vw;
+  font-size: 13vw;
   margin-left: -0.5vw;
   line-height: 80%;
 }
@@ -96,5 +96,6 @@ a {
   z-index: -1;
   color: white;
 }
+
 
 
