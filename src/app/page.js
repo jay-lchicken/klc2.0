@@ -2,10 +2,12 @@
 import Image from "next/image";
 import { motion, useScroll, useTransform, useInView, useAnimation } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import { ThumbsUp, GraduationCap, Speech, Lightbulb, LaptopMinimalCheck, Ear } from 'lucide-react';
+import { ThumbsUp, GraduationCap, Speech, Lightbulb, LaptopMinimalCheck, Ear, ParkingCircle } from 'lucide-react';
 import NavigationHome from "../components/NavigationHome";
 import EntryAnimation from "../components/EntryAnimation";
 import ParallaxHeader from "@/components/parralax";
+import ParallaxText from "@/components/ParallaxText";
+
 const Timeline = () => {
   const timelineRef = useRef(null);
   const isInView = useInView(timelineRef, { once: false, amount: 0.2 });
@@ -64,14 +66,15 @@ const ScrollReveal = ({ children, className }) => {
 };
 
 const StatCard = ({ icon, target, suffix, description }) => {
+    const [animationComplete, setAnimationComplete] = useState(false);
   const cardRef = useRef(null);
   const isInView = useInView(cardRef, { once: true, amount: 0.3 });
   const controls = useAnimation();
   const [counted, setCounted] = useState(false);
   const [count, setCount] = useState(0);
-  
+
   useEffect(() => {
-    if (isInView && !counted) {
+    if (isInView && !counted && animationComplete) {
       controls.start({ scale: 1, opacity: 1 });
       const duration = 1200;
       const interval = 30;
@@ -88,29 +91,71 @@ const StatCard = ({ icon, target, suffix, description }) => {
           setCount(Math.floor(current));
         }
       }, interval);
-      
+
       return () => clearInterval(timer);
     }
-  }, [isInView, target, controls, counted]);
-  
+  }, [isInView, target, controls, counted, animationComplete]);
+  const containerVariants = {
+    hidden: { scale: 0.3, opacity: 0, rotate: 180 },
+    visible: {
+      rotate: 0,
+      scale: 1,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        duration: 0.8,
+        bounce: 0.3,
+        stiffness: 120,
+        when: "beforeChildren",
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const childVariants = {
+    hidden: { y: 50, opacity: 0, scale: 0.3 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      scale: 1,
+      transition: {
+        type: "spring",
+        bounce: 0.4,
+        duration: 0.6,
+      },
+    },
+  };
   return (
-    <motion.div 
+    <motion.div
       ref={cardRef}
-      initial={{ scale: 1, opacity: 0 }}
-      animate={controls}
-      whileHover={{ scale: 1.02 }}
-      transition={{ duration: 0.5 }}
-      className="flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 bg-white rounded-2xl shadow-lg min-h-[270px] max-h-[270px]  border-t-4 border-blue-500 mt-4 w-full"
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
+      whileHover={animationComplete ? { scale: 1.09 } : {}}
+      onAnimationComplete={() => setAnimationComplete(true)}
+      className="flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 bg-white rounded-2xl shadow-lg min-h-[270px] max-h-[270px] border-t-4 border-blue-500 mt-4 w-full"
     >
-      <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center m-2 border-2 border-blue-500">
+      <motion.div
+        variants={childVariants}
+        className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center m-2 border-2 border-blue-500"
+      >
         {icon}
-      </div>
-      <h2 className="text-blue-800 text-4xl sm:text-5xl md:text-6xl font-extrabold bg-blue-100 px-4 py-1 rounded-xl mt-2">
-        {count}{suffix}
-      </h2>
-      <p className="text-blue-700 text-base sm:text-lg md:text-xl font-semibold text-center mt-4">
+      </motion.div>
+
+      <motion.h2
+        variants={childVariants}
+        className="text-blue-800 text-4xl sm:text-5xl md:text-6xl font-extrabold bg-blue-100 px-4 py-1 rounded-xl mt-2"
+      >
+        {count}
+        {suffix}
+      </motion.h2>
+
+      <motion.p
+        variants={childVariants}
+        className="text-blue-700 text-base sm:text-lg md:text-xl font-semibold text-center mt-4"
+      >
         {description}
-      </p>
+      </motion.p>
     </motion.div>
   );
 };
@@ -213,7 +258,6 @@ export default function Home() {
               description="Students participated in our workshops from 2022-2023"
             />
           </ScrollReveal>
-          
           <div ref={aboutRef} id="about" className="w-full bg-white mt-10 py-16 sm:py-20">
             <ScrollReveal className="w-full max-w-6xl mx-auto px-4 flex flex-col items-center justify-center">
               <h1 className="text-blue-800 text-3xl sm:text-4xl md:text-5xl font-bold mb-4">Our Mission</h1>

@@ -3,12 +3,20 @@ import { motion, AnimatePresence } from "framer-motion";
 import React, { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { Menu, X } from 'lucide-react';
-
+import Link from "next/link";
 const links = [
   { label: "Stats", url: "home" },
   { label: "About", url: "about" },
   { label: "Timeline", url: "timeline" },
   { label: "Contact", url: "contact" }
+];
+const navigationLinks = [
+  { label: "About Us", url: "/about" },
+  { label: "Impact", url: "/impact" },
+  { label: 
+    "Workshops", url: "/workshops" },
+  
+  
 ];
 
 const active = {
@@ -25,6 +33,7 @@ const NavigationHome = ({ sectionRefs }) => {
   const [scrolled, setScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
   // Handle scrolling for navbar styling
@@ -48,6 +57,9 @@ const NavigationHome = ({ sectionRefs }) => {
       element.scrollIntoView({ behavior: 'smooth' });
       setIsMenuOpen(false); // Close mobile menu when a link is clicked
     }
+  };
+  const isLinkActive = (url) => {
+    return pathname === url;
   };
 
   // Active section detection on scroll
@@ -221,14 +233,24 @@ const NavigationHome = ({ sectionRefs }) => {
               exit="closed"
               variants={menuVariants}
             >
-              <div className="flex flex-col space-y-6 mt-16 bg">
-                <motion.a
-                    whileHover={{ x: 10 }}
-                    href={""}
-                    className={`text-lg font-medium transition-colors hover:text-blue-600`}
-                  >
-                    Home
-                  </motion.a>
+              <div className="flex flex-col space-y-6 mt-16">
+                {navigationLinks.map((link) => (
+                  <Link href={link.url} key={link.url}>
+                    <motion.span
+                      whileHover={{ x: 10 }}
+                      variants={itemVariants}
+                      className="text-lg font-medium transition-colors hover:text-blue-600 block"
+                      style={
+                        isLinkActive(link.url)
+                          ? { color: "#1e40af", fontWeight: "bold" }
+                          : { color: "#4b5563", fontWeight: "normal" }
+                      }
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      {link.label}
+                    </motion.span>
+                  </Link>
+                ))}
               </div>
             </motion.div>
           )}

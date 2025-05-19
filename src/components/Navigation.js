@@ -5,21 +5,20 @@ import { usePathname } from "next/navigation";
 import { Menu, X } from 'lucide-react';
 import Link from "next/link";
 
-const links = [
-  { label: "About", url: "/about" },
-  
+const navigationLinks = [
+  { label: "About Us", url: "/about" },
+  { label: "Impact", url: "/impact" },
+  { label: "Workshops", url: "/workshops" }
 ];
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
 
-  // Function to toggle menu
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
   
-  // Prevent scrolling when menu is open
   useEffect(() => {
     if (isMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -31,12 +30,10 @@ const Navigation = () => {
     };
   }, [isMenuOpen]);
 
-  // Close menu when route changes
   useEffect(() => {
     setIsMenuOpen(false);
   }, [pathname]);
 
-  // Mobile menu animations
   const menuVariants = {
     closed: {
       x: "100%",
@@ -71,14 +68,12 @@ const Navigation = () => {
     }
   };
 
-  // Function to determine if link is active
   const isLinkActive = (url) => {
     return pathname === url;
   };
 
   return (
     <>
-      {/* Main Navigation */}
       <nav className="w-full flex max-h-[90px] justify-between items-center fixed z-30 p-4 sm:p-6 backdrop-blur-md bg-white bg-opacity-70">
         <Link href="/">
           <motion.img
@@ -91,9 +86,8 @@ const Navigation = () => {
           />
         </Link>
         
-        {/* Desktop Navigation */}
         <div className="hidden lg:flex items-center space-x-8 max-h-[50px">
-          {links.map((link) => (
+          {navigationLinks.map((link) => (
             <Link
               key={link.url}
               href={link.url}
@@ -106,7 +100,6 @@ const Navigation = () => {
           ))}
         </div>
         
-        {/* Menu button */}
         <motion.button
           className="flex lg:hidden flex-col justify-center items-center cursor-pointer z-50 text-black rounded-full p-2 md:p-3 transition-all duration-200"
           onClick={toggleMenu}
@@ -119,7 +112,6 @@ const Navigation = () => {
           )}
         </motion.button>
         
-        {/* Mobile Menu */}
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div
@@ -131,7 +123,7 @@ const Navigation = () => {
               variants={menuVariants}
             >
               <div className="flex flex-col space-y-6 mt-16">
-                {links.map((link) => (
+                {navigationLinks.map((link) => (
                   <Link href={link.url} key={link.url}>
                     <motion.span
                       whileHover={{ x: 10 }}
