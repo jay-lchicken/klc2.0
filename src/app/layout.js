@@ -20,10 +20,31 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased mt-10`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased mt-10 min-h-screen flex flex-col`}
       >
-        {children}
+        <Navigation />
+        <main className="flex-grow">
+          {children}
+        </main>
+        <footer className="footer mt-20 w-full">
+          <p className="text-xl font-bold mb-4">Our Partners</p>
+          <div className="footer-logos">
+            <a href="https://formbricks.com">
+              <img src="/footerlogo.e272c0f1.svg" alt="Formbricks" style={{ width: "250px" }} />
+            </a>
+            <a href="https://bitly.com">
+              <img src="/bitly-logo-black-transparent.png" alt="Bitly" style={{ width: "120px" }} />
+            </a>
+            <a href="">
+              <img src="/rulang-primary-school.png" alt="Rulang PS" style={{ width: "100px" }} />
+            </a>
+            <a href="">
+              <img src="/logo.jpg" alt="Anderson PS" style={{ width: "200px" }} />
+            </a>
+          </div>
+        </footer>
       </body>
     </html>
+    
   );
 }

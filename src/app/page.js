@@ -205,7 +205,7 @@ export default function Home() {
   };
 
   return (
-    <div className="relative flex flex-col items-center justify-center min-h-screen py-2 bg-gradient-to-b from-[#00639A] to-[#004d77]">
+    <div className="relative flex flex-col items-center justify-center min-h-screen py-2 bg-gradient-to-b ">
       {!showContent && <EntryAnimation onAnimationComplete={handleAnimationComplete} />}
       
       {showContent && (
@@ -322,11 +322,11 @@ export default function Home() {
             </ScrollReveal>
           </div>
           
-          <div ref={contactRef} id="contact" className="w-full bg-white py-16 sm:py-20">
+          <div ref={contactRef} id="contact" className="w-full  py-16 sm:py-20">
             <ScrollReveal className="w-full max-w-6xl mx-auto px-4 flex flex-col items-center justify-center">
-              <h1 className="text-blue-800 text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-center">Contact Us</h1>
+              <h1 className="text-white text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-center">Contact Us</h1>
               <div className="h-1 w-16 sm:w-20 bg-blue-500 mx-auto mb-6 sm:mb-8"></div>
-              <p className="text-blue-900 text-xl md:text-2xl text-center mb-8">
+              <p className="text-white text-xl md:text-2xl text-center mb-8">
                 Have questions or want to get involved? Reach out to us!
               </p>
               <div className="flex flex-col md:flex-row gap-6 w-full max-w-4xl">
@@ -343,6 +343,7 @@ export default function Home() {
           </div>
         </>
       )}
+
     </div>
   );
 }
