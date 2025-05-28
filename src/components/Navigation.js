@@ -8,7 +8,8 @@ import Link from "next/link";
 const navigationLinks = [
   { label: "About Us", url: "/about" },
   { label: "Impact", url: "/impact" },
-  { label: "Workshops", url: "/workshops" }
+  { label: "Workshops", url: "/workshops" },
+  {label: "Join Us", url: "/joinus" },
 ];
 
 const Navigation = () => {

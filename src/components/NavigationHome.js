@@ -15,6 +15,8 @@ const navigationLinks = [
   { label: "Impact", url: "/impact" },
   { label: 
     "Workshops", url: "/workshops" },
+      {label: "Join Us", url: "/joinus" },
+
   
   
 ];
