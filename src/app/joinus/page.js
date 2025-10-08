@@ -203,7 +203,7 @@ export default function Volunteer() {
             }
             target={15}
             suffix="+"
-            description="Workshops successfully organized with volunteers"
+            description="Workshops successfully organised with volunteers"
           />
         </ScrollReveal>
 
@@ -273,26 +273,22 @@ export default function Volunteer() {
             <h2 className="text-3xl font-bold text-blue-800 text-center mb-6">
               Join Our Volunteer Team
             </h2>
-            <p className="text-center text-gray-700 mb-8">
-              Fill out the form below to be added to our volunteering list and stay informed about upcoming workshops and events.
-            </p>
+
             <div className="flex justify-center">
-              <motion.iframe
-                width="640"
-                height="480"
-                src="https://forms.office.com/Pages/ResponsePage.aspx?id=qFekKch_sUuJAXDeEkTP6w2LfAPxIchIpI8kp4CVQEZUNUFLWUxTT0dRN0k3RERYOUYySzRGU0hFTi4u&embed=true"
-                frameBorder="0"
-                marginWidth="0"
-                marginHeight="0"
-                className="border-none max-w-full rounded-lg shadow-md"
-                allowFullScreen
-                webkitallowfullscreen="true"
-                mozallowfullscreen="true"
-                msallowfullscreen="true"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-              />
+              <div
+data-heyform-id="Oj9xyyrL"
+data-heyform-type="modal"
+data-heyform-custom-url="https://forms.kidslearncode.org/form/"
+data-heyform-size="large"
+data-heyform-open-trigger="click"
+data-heyform-open-delay="5"
+data-heyform-open-scroll-percent="30"
+data-heyform-trigger-background="#1d4ed8"
+data-heyform-trigger-text="Open Form"
+data-heyform-hide-after-submit="false"
+data-heyform-auto-close="5"
+><button class="heyform__trigger-button" type="button" onclick="HeyForm.openModal('Oj9xyyrL')">Open Form</button></div>
+<script src="https://www.unpkg.com/@heyform-inc/embed@latest/dist/index.umd.js"></script>
             </div>
           </motion.div>
         </ScrollReveal>

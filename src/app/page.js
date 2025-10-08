@@ -15,8 +15,8 @@ const Timeline = () => {
   const timelineEvents = [
     { year: "2022", title: "Foundation", description: "Kids Learn Code was established with our first coding workshop." },
     { year: "2023", title: "Expansion", description: "Reached 200+ students across multiple schools." },
-    { year: "2024", title: "Innovation", description: "Launched specialized workshops in AI and game development." },
-    { year: "2025", title: "Community", description: "Created student mentor program and expanded to underserved communities." }
+    { year: "2024", title: "Innovation", description: "Launched specialised workshops in AI and game development." },
+    { year: "2025", title: "Community", description: "Organised more workshops and increased our reach within the community in Singapore." }
   ];
 
   return (
@@ -60,7 +60,7 @@ const ScrollReveal = ({ children, className }) => {
       transition={{ duration: 0.6, ease: "easeOut" }}
       className={className}
     >
-      {children}
+      {children}`
     </motion.div>
   );
 };
@@ -181,7 +181,7 @@ const SkillCard = ({ icon, title, description, delay }) => {
 
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
-  const [showContent, setShowContent] = useState(false);
+  const [showContent, setShowContent] = useState(true);
   const homeRef = useRef(null);
   const aboutRef = useRef(null);
   const timelineRef = useRef(null);
@@ -206,8 +206,7 @@ export default function Home() {
 
   return (
     <div className="relative flex flex-col items-center justify-center min-h-screen py-2 bg-gradient-to-b ">
-      {!showContent && <EntryAnimation onAnimationComplete={handleAnimationComplete} />}
-      
+
       {showContent && (
         <>
           
