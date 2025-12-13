@@ -1,6 +1,9 @@
 import { Geist, Geist_Mono, Poppins } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
+import FormbricksProvider from "@/app/formbricks.tsx";
+import {Suspense} from "react";
+import Snow from "@/app/snow.tsx";
 const geistSans = Poppins({
   variable: "--font-poppins",
   subsets: ["latin"],
@@ -21,6 +24,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
       <html lang="en">
+      <Snow />
+      <Suspense>
+        <FormbricksProvider />
+      </Suspense>
       <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased mt-10 min-h-screen flex flex-col`}
       >

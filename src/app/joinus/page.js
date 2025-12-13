@@ -275,20 +275,10 @@ export default function Volunteer() {
             </h2>
 
             <div className="flex justify-center">
-              <div
-data-heyform-id="Oj9xyyrL"
-data-heyform-type="modal"
-data-heyform-custom-url="https://forms.kidslearncode.org/form/"
-data-heyform-size="large"
-data-heyform-open-trigger="click"
-data-heyform-open-delay="5"
-data-heyform-open-scroll-percent="30"
-data-heyform-trigger-background="#1d4ed8"
-data-heyform-trigger-text="Open Form"
-data-heyform-hide-after-submit="false"
-data-heyform-auto-close="5"
-><button class="heyform__trigger-button" type="button" onclick="HeyForm.openModal('Oj9xyyrL')">Open Form</button></div>
-<script src="https://www.unpkg.com/@heyform-inc/embed@latest/dist/index.umd.js"></script>
+              <a href="https://forms.kidslearncode.org/s/cmj3n8c8m000ikc01x8ujva79"><div className={"w-52 h-12 bg-blue-500 text-black flex items-center justify-center rounded-xl shadow-lg hover:bg-blue-600 transition-colors duration-300"}>
+                Join Us!
+              </div></a>
+
             </div>
           </motion.div>
         </ScrollReveal>
