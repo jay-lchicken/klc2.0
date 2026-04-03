@@ -55,8 +55,8 @@ export default function About() {
                 transition={{ duration: 0.8 }}
             >
                 <div className="text-center">
-                    <motion.h1 
-                        className="text-5xl font-bold text-white"
+                    <motion.h1
+                        className="gradient-text-white text-5xl font-bold"
                         initial={{ scale: 0.8 }}
                         animate={{ scale: 1 }}
                         transition={{ delay: 0.2, duration: 0.5 }}
@@ -76,8 +76,8 @@ export default function About() {
             
             
             <section className="intro">
-                <motion.div 
-                    className="flex flex-col items-start justify-center bg-white p-5 rounded-3xl text-black"
+                <motion.div
+                    className="glow-card flex flex-col items-start justify-center bg-white p-5 rounded-3xl text-black"
                     initial={{ opacity: 0, x: -50 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.7, duration: 0.8 }}

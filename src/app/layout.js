@@ -4,6 +4,8 @@ import Navigation from "@/components/Navigation";
 import FormbricksProvider from "@/app/formbricks.tsx";
 import {Suspense} from "react";
 import Snow from "@/app/snow.tsx";
+import CursorTrail from "@/components/CursorTrail";
+import Footer from "@/components/Footer";
 const geistSans = Poppins({
   variable: "--font-poppins",
   subsets: ["latin"],
@@ -24,7 +26,6 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
       <html lang="en">
-      <Snow />
       <Suspense>
         <FormbricksProvider />
       </Suspense>
@@ -33,6 +34,7 @@ export default function RootLayout({ children }) {
       >
       <link rel="icon" type="image/x-icon" href="https://i.ibb.co/DtzhGqz/Kids-Learn-Code-1.png"/>
 
+      <CursorTrail />
       <Navigation/>
       <main className="flex-grow">
         {children}
@@ -56,24 +58,7 @@ export default function RootLayout({ children }) {
             `
           }}
       />
-      <footer className="footer mt-20 w-full">
-        <p className="text-xl font-bold mb-4">Our Partners</p>
-        <div className="footer-logos">
-          <a href="https://formbricks.com">
-            <img src="/footerlogo.e272c0f1.svg" alt="Formbricks" style={{width: "250px"}}/>
-          </a>
-          <a href="https://bitly.com">
-            <img src="/bitly-logo-black-transparent.png" alt="Bitly" style={{width: "120px"}}/>
-          </a>
-          <a href="">
-            <img src="/rulang-primary-school.png" alt="Rulang PS" style={{width: "100px"}}/>
-          </a>
-          <a href="">
-            <img src="/logo.jpg" alt="Anderson PS" style={{width: "200px"}}/>
-          </a>
-        </div>
-
-      </footer>
+      <Footer />
 
       </body>
       </html>

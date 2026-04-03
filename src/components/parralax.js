@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import FloatingElements from "@/components/FloatingElements";
 
 const ParallaxHeader = () => {
   const headerRef = useRef(null);
@@ -35,12 +36,13 @@ const ParallaxHeader = () => {
         <div className="absolute inset-0 bg-blue-900 bg-opacity-40"></div>
       </motion.div>
       
+      <FloatingElements />
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full px-4 z-10">
-        <motion.h1 
+        <motion.h1
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8 }}
-          className="font-red-rose text-3xl sm:text-5xl lg:text-7xl font-extrabold drop-shadow-lg text-white text-center"
+          className="gradient-text-white font-red-rose text-3xl sm:text-5xl lg:text-7xl font-extrabold drop-shadow-lg text-center"
         >
           Kids Learn Code
         </motion.h1>

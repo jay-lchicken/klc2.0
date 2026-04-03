@@ -4,6 +4,8 @@ import Navigation from "@/components/Navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useInView, useAnimation } from "framer-motion";
+import MagneticButton from "@/components/MagneticButton";
+import FloatingElements from "@/components/FloatingElements";
 
 // ScrollReveal component for scroll-activated animations
 const ScrollReveal = ({ children, className, delay = 0 }) => {
@@ -43,7 +45,7 @@ const AnimatedCard = ({ children, delay = 0 }) => {
         y: -10,
         transition: { duration: 0.3 }
       }}
-      className="mb-16 bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300"
+      className="glow-card mb-16 bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300"
     >
       {children}
     </motion.div>
@@ -52,8 +54,9 @@ const AnimatedCard = ({ children, delay = 0 }) => {
 
 export default function Workshops() {
     return (
-        <div className="min-h-screen">
+        <div className="min-h-screen relative overflow-hidden">
             <Navigation />
+            <FloatingElements />
            
             <motion.header 
                 className="mt-20 pt-16 pb-10 flex justify-center bg-gradient-to-r"
@@ -62,8 +65,8 @@ export default function Workshops() {
                 transition={{ duration: 0.8 }}
             >
                 <div className="text-center">
-                    <motion.h1 
-                        className="text-5xl font-bold text-white"
+                    <motion.h1
+                        className="gradient-text-white text-5xl font-bold"
                         initial={{ y: -20 }}
                         animate={{ y: 0 }}
                         transition={{ duration: 0.5, delay: 0.2 }}
@@ -341,15 +344,17 @@ export default function Workshops() {
                 transition={{ duration: 0.7 }}
             >
                 <h2 className="text-3xl font-bold text-white mb-6">Ready to transform learning?</h2>
-                <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                >
-                    <Link href="/about" className="bg-white text-blue-700 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-blue-50 transition-all duration-300">
-                        Learn More About Us
-                    </Link>
-                </motion.div>
+                <MagneticButton strength={0.3} threshold={80}>
+                  <motion.div
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                  >
+                      <Link href="/about" className="glow-button bg-white text-blue-700 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-blue-50 transition-all duration-300">
+                          Learn More About Us
+                      </Link>
+                  </motion.div>
+                </MagneticButton>
             </motion.div>
         </div>
     );

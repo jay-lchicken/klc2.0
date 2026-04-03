@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { Menu, X } from 'lucide-react';
 import Link from "next/link";
+import MagneticButton from "@/components/MagneticButton";
 const links = [
   { label: "Stats", url: "home" },
   { label: "About", url: "about" },
@@ -177,36 +178,38 @@ const NavigationHome = ({ sectionRefs }) => {
             const isActive = index === activeIndex;
 
             return (
-              <motion.li 
-                key={index} 
+              <motion.li
+                key={index}
                 className="relative"
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
               >
-                <a 
-                  href={"#" + url} 
-                  onClick={(e) => handleNavClick(e, url)}
-                  className={`px-3 py-2 transition-all duration-300 relative block text-sm sm:text-base ${
-                    isActive ? 'font-semibold scale-105' : 'hover:text-blue-600'
-                  }`}
-                >
-                  {isActive && (
-                    <motion.span 
-                      layoutId="navIndicator" 
-                      className="absolute inset-0 bg-blue-100 rounded-full -z-10" 
-                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                    />
-                  )}
-                  <span style={isActive ? active : inactive}>{label}</span>
-                  {isActive && (
-                    <motion.div 
-                      className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-blue-600 rounded-full"
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      transition={{ duration: 0.3 }}
-                    />
-                  )}
-                </a>
+                <MagneticButton strength={0.25} threshold={50}>
+                  <a
+                    href={"#" + url}
+                    onClick={(e) => handleNavClick(e, url)}
+                    className={`glow-button px-3 py-2 transition-all duration-300 relative block text-sm sm:text-base rounded-full ${
+                      isActive ? 'font-semibold scale-105' : 'hover:text-blue-600'
+                    }`}
+                  >
+                    {isActive && (
+                      <motion.span
+                        layoutId="navIndicator"
+                        className="absolute inset-0 bg-blue-100 rounded-full -z-10"
+                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                      />
+                    )}
+                    <span style={isActive ? active : inactive}>{label}</span>
+                    {isActive && (
+                      <motion.div
+                        className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-blue-600 rounded-full"
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        transition={{ duration: 0.3 }}
+                      />
+                    )}
+                  </a>
+                </MagneticButton>
               </motion.li>
             );
           })}

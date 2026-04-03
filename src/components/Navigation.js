@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { Menu, X } from 'lucide-react';
 import Link from "next/link";
+import MagneticButton from "@/components/MagneticButton";
 
 const navigationLinks = [
   { label: "About Us", url: "/about" },
@@ -87,17 +88,18 @@ const Navigation = () => {
           />
         </Link>
         
-        <div className="hidden lg:flex items-center space-x-8 max-h-[50px">
+        <div className="hidden lg:flex items-center space-x-8 max-h-[50px]">
           {navigationLinks.map((link) => (
-            <Link
-              key={link.url}
-              href={link.url}
-              className={`text-base font-medium transition-colors hover:text-blue-600 ${
-                isLinkActive(link.url) ? "text-blue-700 font-bold" : "text-gray-600"
-              }`}
-            >
-              {link.label}
-            </Link>
+            <MagneticButton key={link.url} strength={0.3} threshold={60}>
+              <Link
+                href={link.url}
+                className={`glow-button text-base font-medium transition-colors hover:text-blue-600 px-3 py-2 rounded-lg ${
+                  isLinkActive(link.url) ? "text-blue-700 font-bold" : "text-gray-600"
+                }`}
+              >
+                {link.label}
+              </Link>
+            </MagneticButton>
           ))}
         </div>
         

@@ -1,158 +1,26 @@
 "use client";
-import { useEffect, useState } from "react";
 import { Users, Heart, Award, Mail } from "lucide-react";
-import { motion, useAnimation } from "framer-motion";
-import { useRef } from "react";
-import { useInView } from "framer-motion";
-
-const ScrollReveal = ({ children, className }) => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: false, threshold: 0.1 });
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 30 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  );
-};
-
-const StatCard = ({ icon, target, suffix, description }) => {
-  const [animationComplete, setAnimationComplete] = useState(false);
-  const cardRef = useRef(null);
-  const isInView = useInView(cardRef, { once: true, amount: 0.3 });
-  const controls = useAnimation();
-  const [counted, setCounted] = useState(false);
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    if (isInView && !counted && animationComplete) {
-      controls.start({ scale: 1, opacity: 1 });
-      const duration = 1200;
-      const interval = 30;
-      const steps = duration / interval;
-      const increment = target / steps;
-      let current = 0;
-      const timer = setInterval(() => {
-        current += increment;
-        if (current >= target) {
-          setCount(target);
-          clearInterval(timer);
-          setCounted(true);
-        } else {
-          setCount(Math.floor(current));
-        }
-      }, interval);
-
-      return () => clearInterval(timer);
-    }
-  }, [isInView, target, controls, counted, animationComplete]);
-
-  const containerVariants = {
-    hidden: { scale: 0.3, opacity: 0, rotate: 180 },
-    visible: {
-      rotate: 0,
-      scale: 1,
-      opacity: 1,
-      transition: {
-        type: "spring",
-        duration: 0.8,
-        bounce: 0.3,
-        stiffness: 120,
-        when: "beforeChildren",
-        staggerChildren: 0.2,
-      },
-    },
-  };
-
-  const childVariants = {
-    hidden: { y: 50, opacity: 0, scale: 0.3 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      scale: 1,
-      transition: {
-        type: "spring",
-        bounce: 0.4,
-        duration: 0.6,
-      },
-    },
-  };
-
-  return (
-    <motion.div
-      ref={cardRef}
-      initial="hidden"
-      animate="visible"
-      variants={containerVariants}
-      whileHover={animationComplete ? { scale: 1.09 } : {}}
-      onAnimationComplete={() => setAnimationComplete(true)}
-      className="flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 bg-white rounded-2xl shadow-lg min-h-[270px] max-h-[270px] border-t-4 border-blue-500 mt-4 w-full"
-    >
-      <motion.div
-        variants={childVariants}
-        className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center m-2 border-2 border-blue-500"
-      >
-        {icon}
-      </motion.div>
-
-      <motion.h2
-        variants={childVariants}
-        className="text-blue-800 text-4xl sm:text-5xl md:text-6xl font-extrabold bg-blue-100 px-4 py-1 rounded-xl mt-2"
-      >
-        {count}
-        {suffix}
-      </motion.h2>
-
-      <motion.p
-        variants={childVariants}
-        className="text-blue-700 text-base sm:text-lg md:text-xl font-semibold text-center mt-4"
-      >
-        {description}
-      </motion.p>
-    </motion.div>
-  );
-};
-
-const BenefitCard = ({ icon, title, description }) => {
-  const cardRef = useRef(null);
-  const isInView = useInView(cardRef, { once: true, amount: 0.3 });
-
-  return (
-    <motion.div
-      ref={cardRef}
-      initial={{ opacity: 0, y: 50 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
-      className="bg-white p-6 rounded-2xl shadow-lg border-t-4 border-blue-500 hover:shadow-xl transition-all duration-300"
-    >
-      <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4 border-2 border-blue-500">
-        {icon}
-      </div>
-      <h3 className="text-xl font-bold text-blue-800 mb-3">{title}</h3>
-      <p className="text-gray-700 leading-relaxed">{description}</p>
-    </motion.div>
-  );
-};
+import { motion } from "framer-motion";
+import ScrollReveal from "@/components/ScrollReveal";
+import StatCard from "@/components/StatCard";
+import BenefitCard from "@/components/BenefitCard";
+import TiltCard from "@/components/TiltCard";
+import MagneticButton from "@/components/MagneticButton";
+import FloatingElements from "@/components/FloatingElements";
 
 export default function Volunteer() {
   return (
-    <div className="relative min-h-screen  text-white">
+    <div className="relative min-h-screen text-white overflow-hidden">
+      <FloatingElements />
       <motion.header
-        className="pt-16 pb-10 flex justify-center bg-gradient-to-r  mt-20"
+        className="pt-16 pb-10 flex justify-center mt-20 relative z-10"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
       >
         <div className="text-center">
           <motion.h1
-            className="text-5xl font-bold text-white"
+            className="gradient-text-white text-5xl font-bold"
             initial={{ y: -30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6 }}
@@ -240,7 +108,7 @@ export default function Volunteer() {
 
         <ScrollReveal className="w-[90%] text-center mb-8">
           <motion.div
-            className="bg-white p-6 rounded-2xl shadow-lg border-t-4 border-blue-500"
+            className="glow-card bg-white p-6 rounded-2xl shadow-lg border-t-4 border-blue-500"
             whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
           >
             <div className="flex items-center justify-center mb-4">
@@ -275,10 +143,13 @@ export default function Volunteer() {
             </h2>
 
             <div className="flex justify-center">
-              <a href="https://forms.kidslearncode.org/s/cmj3n8c8m000ikc01x8ujva79"><div className={"w-52 h-12 bg-blue-500 text-black flex items-center justify-center rounded-xl shadow-lg hover:bg-blue-600 transition-colors duration-300"}>
-                Join Us!
-              </div></a>
-
+              <MagneticButton strength={0.3} threshold={80}>
+                <a href="https://forms.kidslearncode.org/s/cmj3n8c8m000ikc01x8ujva79">
+                  <div className="glow-button w-52 h-12 bg-blue-500 text-white font-semibold flex items-center justify-center rounded-xl shadow-lg hover:bg-blue-600 transition-colors duration-300">
+                    Join Us!
+                  </div>
+                </a>
+              </MagneticButton>
             </div>
           </motion.div>
         </ScrollReveal>
