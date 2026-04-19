@@ -144,7 +144,7 @@ export default function Volunteer() {
 
             <div className="flex justify-center">
               <MagneticButton strength={0.3} threshold={80}>
-                <a href="https://forms.kidslearncode.org/s/cmj3n8c8m000ikc01x8ujva79">
+                <a href="https://forms.kidslearncode.org/s/cmo514vz50005p901kosltb7x">
                   <div className="glow-button w-52 h-12 bg-blue-500 text-white font-semibold flex items-center justify-center rounded-xl shadow-lg hover:bg-blue-600 transition-colors duration-300">
                     Join Us!
                   </div>
