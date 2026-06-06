@@ -18,6 +18,14 @@ import {
   X,
 } from "lucide-react";
 
+const partners = [
+  {
+    name: "Formbricks",
+    href: "https://formbricks.com",
+    logo: "/footerlogo.e272c0f1.svg",
+  },
+];
+
 const navItems = [
   { label: "Home", href: "#home" },
   { label: "About", href: "#about" },
@@ -270,19 +278,44 @@ export default function Home() {
       </section>
 
       <footer className="figma-footer">
-        <div>
-          <Image
-            src="/Kids Learn Code (130 x 50 px)-2.png"
-            alt="Kids Learn Code"
-            width={130}
-            height={50}
-          />
-          <p>Allowing all students to learn coding for free.</p>
+        <div className="figma-footer-main">
+          <div>
+            <Image
+              src="/Kids Learn Code (130 x 50 px)-2.png"
+              alt="Kids Learn Code"
+              width={130}
+              height={50}
+            />
+            <p>Allowing all students to learn coding for free.</p>
+          </div>
+          <Link href="/joinus" className="figma-primary">
+            Register interest
+            <ArrowRight size={18} aria-hidden="true" />
+          </Link>
         </div>
-        <Link href="/joinus" className="figma-primary">
-          Register interest
-          <ArrowRight size={18} aria-hidden="true" />
-        </Link>
+
+        <div className="figma-partners" aria-label="Kids Learn Code partners">
+          <span>Our Partner</span>
+          <div className="figma-partner-list">
+            {partners.map((partner) => (
+              <a
+                key={partner.name}
+                href={partner.href}
+                target="_blank"
+                rel="noreferrer"
+                className="figma-partner-logo"
+                aria-label={`${partner.name} website`}
+              >
+                <Image
+                  src={partner.logo}
+                  alt={partner.name}
+                  width={190}
+                  height={42}
+                />
+              </a>
+            ))}
+          </div>
+        </div>
       </footer>
     </main>
   );

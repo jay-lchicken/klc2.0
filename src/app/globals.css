@@ -24,7 +24,9 @@
 }
 
 html {
+  background: var(--klc-blue);
   scroll-behavior: smooth;
+  overscroll-behavior-y: none;
 }
 
 html,
@@ -36,9 +38,10 @@ body {
 
 body {
   color: var(--klc-ink);
-  background: #f5fbff;
+  background: var(--klc-blue);
   font-family: "Inter", "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   overflow-x: hidden;
+  overscroll-behavior-y: none;
 }
 
 a {
@@ -723,9 +726,7 @@ button {
 }
 
 .figma-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: grid;
   gap: 26px;
   margin-bottom: 32px;
   padding: 34px;
@@ -733,6 +734,13 @@ button {
   color: #ffffff;
   background: linear-gradient(135deg, var(--klc-blue-dark), var(--klc-blue));
   box-shadow: var(--klc-shadow);
+}
+
+.figma-footer-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 26px;
 }
 
 .figma-footer p {
@@ -744,6 +752,50 @@ button {
 .figma-footer .figma-primary {
   color: var(--klc-blue-dark);
   background: #ffffff;
+}
+
+.figma-partners {
+  display: grid;
+  gap: 14px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.figma-partners > span {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.figma-partner-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.figma-partner-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 66px;
+  padding: 14px 18px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 14px 32px rgba(0, 35, 59, 0.18);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.figma-partner-logo:hover {
+  transform: translateY(-2px);
+  background: #ffffff;
+}
+
+.figma-partner-logo img {
+  width: min(190px, 48vw);
+  height: auto;
+  object-fit: contain;
 }
 
 .join-page {
@@ -1161,9 +1213,17 @@ button {
   }
 
   .figma-actions,
-  .figma-footer {
+  .figma-footer-main {
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .figma-partner-list {
+    display: grid;
+  }
+
+  .figma-partner-logo {
+    width: 100%;
   }
 
   .figma-primary,
