@@ -1,22 +1,6 @@
-import { Geist, Geist_Mono, Poppins } from "next/font/google";
 import "./globals.css";
-import Navigation from "@/components/Navigation";
 import FormbricksProvider from "@/app/formbricks.tsx";
-import {Suspense} from "react";
-import Snow from "@/app/snow.tsx";
-import CursorTrail from "@/components/CursorTrail";
-import Footer from "@/components/Footer";
-const geistSans = Poppins({
-  variable: "--font-poppins",
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
-
-const geistMono = Poppins({
-  variable: "--font-poppins",
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
+import { Suspense } from "react";
 
 export const metadata = {
   title: "Kids Learn Code",
@@ -25,21 +9,21 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-      <html lang="en">
-      <Suspense>
-        <FormbricksProvider />
-      </Suspense>
-      <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased mt-10 min-h-screen flex flex-col`}
-      >
-      <link rel="icon" type="image/x-icon" href="https://i.ibb.co/DtzhGqz/Kids-Learn-Code-1.png"/>
-
-      <CursorTrail />
-      <Navigation/>
-      <main className="flex-grow">
+    <html lang="en">
+      <head>
+        <link rel="icon" type="image/x-icon" href="https://i.ibb.co/DtzhGqz/Kids-Learn-Code-1.png" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body>
+        <Suspense>
+          <FormbricksProvider />
+        </Suspense>
         {children}
-      </main>
-      <script
+        <script
           dangerouslySetInnerHTML={{
             __html: `
               (function(d,t) {
@@ -55,13 +39,10 @@ export default function RootLayout({ children }) {
                   })
                 }
               })(document,"script");
-            `
+            `,
           }}
-      />
-      <Footer />
-
+        />
       </body>
-      </html>
-
+    </html>
   );
 }

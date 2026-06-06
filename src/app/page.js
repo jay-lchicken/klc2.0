@@ -1,232 +1,289 @@
 "use client";
+
+import { useState } from "react";
 import Image from "next/image";
-import { motion, useScroll, useTransform, useInView, useAnimation } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
-import { ThumbsUp, GraduationCap, Speech, Lightbulb, LaptopMinimalCheck, Ear } from 'lucide-react';
-import NavigationHome from "../components/NavigationHome";
-import ParallaxHeader from "@/components/parralax";
-import ScrollReveal from "@/components/ScrollReveal";
-import StatCard from "@/components/StatCard";
-import TiltCard from "@/components/TiltCard";
-import FloatingElements from "@/components/FloatingElements";
+import Link from "next/link";
+import {
+  ArrowRight,
+  BookOpen,
+  Brain,
+  CheckCircle2,
+  Code2,
+  GraduationCap,
+  Menu,
+  PlayCircle,
+  School,
+  Sparkles,
+  Users,
+  X,
+} from "lucide-react";
 
-const Timeline = () => {
-  const timelineRef = useRef(null);
-  const isInView = useInView(timelineRef, { once: false, amount: 0.2 });
-  const { scrollYProgress } = useScroll({
-    target: timelineRef,
-    offset: ["start center", "end center"],
-  });
+const navItems = [
+  { label: "Home", href: "#home" },
+  { label: "About", href: "#about" },
+  { label: "Courses", href: "#courses" },
+  { label: "Impact", href: "#stats" },
+];
 
-  const timelineEvents = [
-    { year: "2022", title: "Foundation", description: "Kids Learn Code was established with our first coding workshop." },
-    { year: "2023", title: "Expansion", description: "Reached 200+ students across multiple schools." },
-    { year: "2024", title: "Innovation", description: "Launched specialised workshops in AI and game development." },
-    { year: "2025", title: "Community", description: "Organised more workshops and increased our reach within the community in Singapore." }
-  ];
+const stats = [
+  { value: "200+", label: "Students taught", icon: Users },
+  { value: "10+", label: "Schools reached", icon: School },
+  { value: "70%", label: "Enjoyment rate", icon: Sparkles },
+  { value: "4", label: "Years running", icon: GraduationCap },
+];
 
-  return (
-    <div ref={timelineRef} className="relative max-w-6xl mx-auto px-4 py-12">
-      {/* Background track */}
-      <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-blue-300 opacity-30"></div>
-      {/* Animated fill line */}
-      <motion.div
-        className="absolute left-1/2 transform -translate-x-1/2 w-1 bg-blue-400 origin-top"
-        style={{ scaleY: scrollYProgress, height: "100%" }}
-      />
+const courses = [
+  {
+    title: "Scratch Basics",
+    level: "Beginner",
+    age: "Ages 7-9",
+    image: "/ScratchSample.png",
+    icon: Code2,
+    description: "Build interactive stories, animations, and games with visual programming.",
+    outcomes: ["Loops and conditions", "Creative projects", "Game mechanics"],
+  },
+  {
+    title: "Python Fundamentals",
+    level: "Intermediate",
+    age: "Ages 10-12",
+    image: "/PythonSample.png",
+    icon: BookOpen,
+    description: "Learn text-based coding through puzzles, useful scripts, and mini-games.",
+    outcomes: ["Variables and functions", "Debugging practice", "Text-based games"],
+  },
+  {
+    title: "AI & Game Dev",
+    level: "Advanced",
+    age: "Ages 10-12",
+    image: "/media.png",
+    icon: Brain,
+    description: "Explore AI concepts and game development through guided challenges.",
+    outcomes: ["AI creativity", "Game engines", "Project showcase"],
+  },
+];
 
-      {timelineEvents.map((event, index) => (
-        <motion.div
-          key={index}
-          className={`flex flex-col md:flex-row items-center mb-12 ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}
-          initial={{ opacity: 0, y: 50, rotateX: -15, scale: 0.95 }}
-          animate={isInView ? { opacity: 1, y: 0, rotateX: 0, scale: 1 } : { opacity: 0, y: 50, rotateX: -15, scale: 0.95 }}
-          transition={{ duration: 0.6, delay: index * 0.3, type: "spring", damping: 20 }}
-          style={{ perspective: 1000 }}
-        >
-          <div className={`md:w-1/2 px-4 z-20 ${index % 2 === 0 ? 'md:text-right' : 'md:text-left'}`}>
-            <div className="glow-card bg-white p-6 rounded-lg shadow-lg h-full min-h-[160px] flex flex-col justify-center">
-              <h3 className="text-blue-800 text-xl font-bold">{event.year}</h3>
-              <h4 className="text-blue-700 text-lg font-semibold mt-1">{event.title}</h4>
-              <p className="text-gray-700 mt-2">{event.description}</p>
-            </div>
-          </div>
-          {/* Glowing timeline dot */}
-          <div className="flex items-center justify-center my-4 md:my-0 md:w-0 relative">
-            <motion.div
-              className="absolute bg-blue-400 rounded-full w-6 h-6"
-              animate={{ scale: [1, 1.8, 1], opacity: [0.6, 0, 0.6] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
-            <div className="bg-blue-500 w-6 h-6 rounded-full border-4 border-white shadow z-10"></div>
-          </div>
-          <div className="md:w-1/2"></div>
-        </motion.div>
-      ))}
-    </div>
-  );
-};
-
-const SkillCard = ({ icon, title, description, delay }) => {
-  const skillRef = useRef(null);
-  const isInView = useInView(skillRef, { once: false, amount: 0.3 });
-
-  return (
-    <TiltCard intensity={10}>
-      <motion.div
-        ref={skillRef}
-        className="glow-card flex flex-col items-center justify-center mx-2 sm:mx-4 mb-6 p-6 bg-white rounded-2xl shadow-md"
-        initial={{ scale: 0.3, opacity: 0 }}
-        animate={isInView ? { scale: 1, opacity: 1 } : { scale: 0.3, opacity: 0 }}
-        transition={{ duration: 0.5, delay: delay, type: "spring", damping: 20 }}
-      >
-        {icon}
-        <h1 className="text-blue-800 text-lg sm:text-xl font-semibold mt-2 text-center">{title}</h1>
-        <p className="text-blue-700 text-sm sm:text-base text-center">{description}</p>
-      </motion.div>
-    </TiltCard>
-  );
-};
+const aboutCards = [
+  "Free workshops for every child",
+  "Student mentors who make coding approachable",
+  "Project-based lessons with real outcomes",
+];
 
 export default function Home() {
-  const [scrolled, setScrolled] = useState(false);
-  const [showContent, setShowContent] = useState(true);
-  const homeRef = useRef(null);
-  const aboutRef = useRef(null);
-  const timelineRef = useRef(null);
-  const contactRef = useRef(null);
-  const skillsRef = useRef(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <div className="relative flex flex-col items-center justify-center min-h-screen py-2">
+    <main className="figma-page">
+      <header className="figma-nav">
+        <Link href="/" className="figma-brand" aria-label="Kids Learn Code home">
+          <Image
+            src="/Kids Learn Code (130 x 50 px)-2.png"
+            alt="Kids Learn Code"
+            width={130}
+            height={50}
+            priority
+          />
+        </Link>
 
-      {showContent && (
-        <>
-          <NavigationHome sectionRefs={[homeRef, aboutRef, timelineRef, contactRef]} />
-          <header ref={homeRef} id="home" className="relative text-center text-white w-full px-4 sm:w-[85%] z-10 pt-16 sm:pt-20">
-            <ParallaxHeader />
-          </header>
+        <nav className="figma-nav-links" aria-label="Primary navigation">
+          {navItems.map((item) => (
+            <a key={item.href} href={item.href}>
+              {item.label}
+            </a>
+          ))}
+        </nav>
 
-          <ScrollReveal className="flex grid-cols-1 md:grid-cols-2 items-center justify-between gap-4 sm:gap-8 z-10 w-full px-4 sm:w-[85%]">
-            <TiltCard intensity={8}>
-              <StatCard
-                icon={<ThumbsUp size={28} className="text-blue-500" strokeWidth={2.5} />}
-                target={70}
-                suffix="%"
-                description="Students who agree/strongly agree that our workshops were enjoyable"
-              />
-            </TiltCard>
-            <TiltCard intensity={8}>
-              <StatCard
-                icon={<GraduationCap size={28} className="text-blue-500" strokeWidth={2.5} />}
-                target={300}
-                suffix="+"
-                description="Students participated in our workshops from 2022-2023"
-              />
-            </TiltCard>
-          </ScrollReveal>
+        <Link href="/joinus" className="figma-nav-button">
+          Join Us
+          <ArrowRight size={16} aria-hidden="true" />
+        </Link>
 
-          <div ref={aboutRef} id="about" className="w-full bg-white mt-10 py-16 sm:py-20">
-            <ScrollReveal className="w-full max-w-6xl mx-auto px-4 flex flex-col items-center justify-center">
-              <h1 className="gradient-text text-3xl sm:text-4xl md:text-5xl font-bold mb-4">Our Mission</h1>
-              <div className="h-1 w-16 sm:w-20 bg-blue-500 mx-auto mb-6 sm:mb-8"></div>
-              <p className="text-blue-900 text-xl sm:text-2xl md:text-3xl font-medium text-center max-w-3xl">
-                Engage and ignite the passion for coding among all students in an evolving world.
-              </p>
-            </ScrollReveal>
-          </div>
+        <button
+          className="figma-menu-button"
+          type="button"
+          aria-label={mobileOpen ? "Close menu" : "Open menu"}
+          aria-expanded={mobileOpen}
+          onClick={() => setMobileOpen((open) => !open)}
+        >
+          {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+        </button>
+      </header>
 
-          <div className="w-full mt-0 py-16 sm:py-20 animated-gradient-blue relative overflow-hidden">
-            <FloatingElements />
-            <ScrollReveal className="w-full max-w-6xl mx-auto px-4 flex flex-col items-center justify-center relative z-10">
-              <h1 className="gradient-text-white text-3xl sm:text-4xl md:text-5xl font-bold mb-4">One Step At A Time</h1>
-              <div className="h-1 w-16 sm:w-20 bg-white mx-auto mb-6 sm:mb-8"></div>
-              <p className="text-white text-xl sm:text-2xl md:text-3xl w-full sm:w-[90%] md:w-[80%] text-center font-medium">
-                We aim to engage and ignite kids' passion for coding in an evolving world, and we envision a world where every child has access to quality coding education.
-              </p>
-            </ScrollReveal>
-          </div>
-
-          <div ref={skillsRef} className="w-full bg-white py-16 sm:py-20 relative overflow-hidden">
-            <div className="w-full max-w-6xl mx-auto px-4 flex flex-col items-center justify-center">
-              <ScrollReveal>
-                <h1 className="gradient-text text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-center">Skills Developed</h1>
-                <div className="h-1 w-16 sm:w-20 bg-blue-500 mx-auto mb-6 sm:mb-8"></div>
-              </ScrollReveal>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6 w-full">
-                <SkillCard
-                  icon={<Speech size={48} className="text-blue-500" />}
-                  title="Confidence"
-                  description="Students are taught how to make slides and present them in our workshops."
-                  delay={0}
-                />
-                <SkillCard
-                  icon={<Lightbulb size={48} className="text-blue-500" />}
-                  title="Originality"
-                  description="Students are encouraged to come up with new ideas using the problem statement."
-                  delay={0.1}
-                />
-                <SkillCard
-                  icon={<LaptopMinimalCheck size={48} className="text-blue-500" />}
-                  title="Digital Literacy"
-                  description="Students learn how to stay safe and code better with Computational Thinking."
-                  delay={0.2}
-                />
-                <SkillCard
-                  icon={<Ear size={48} className="text-blue-500" />}
-                  title="Engagement"
-                  description="Quizzes and hackathons keep students focused and satisfied during workshops!"
-                  delay={0.3}
-                />
-              </div>
-            </div>
-          </div>
-
-          <div ref={timelineRef} id="timeline" className="w-full py-16 sm:py-20 animated-gradient-dark relative overflow-hidden">
-            <FloatingElements />
-            <ScrollReveal className="w-full relative z-10">
-              <h1 className="gradient-text-white text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-center">Our Journey</h1>
-              <div className="h-1 w-16 sm:w-20 bg-blue-500 mx-auto mb-6 sm:mb-8"></div>
-              <Timeline />
-            </ScrollReveal>
-          </div>
-
-          <div ref={contactRef} id="contact" className="w-full py-16 sm:py-20 relative overflow-hidden">
-            <FloatingElements />
-            <ScrollReveal className="w-full max-w-6xl mx-auto px-4 flex flex-col items-center justify-center relative z-10">
-              <h1 className="gradient-text-white text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-center">Contact Us</h1>
-              <div className="h-1 w-16 sm:w-20 bg-blue-500 mx-auto mb-6 sm:mb-8"></div>
-              <p className="text-white text-xl md:text-2xl text-center mb-8">
-                Have questions or want to get involved? Reach out to us!
-              </p>
-              <div className="flex flex-col md:flex-row gap-6 w-full max-w-4xl">
-                <TiltCard intensity={8} className="flex-1">
-                  <div className="glow-card bg-blue-50 p-6 rounded-xl shadow-md h-full">
-                    <h3 className="text-blue-800 text-xl font-bold mb-3">Email Us</h3>
-                    <p className="text-blue-600">contact@kidslearncode.org</p>
-                  </div>
-                </TiltCard>
-                <TiltCard intensity={8} className="flex-1">
-                  <div className="glow-card bg-blue-50 p-6 rounded-xl shadow-md h-full">
-                    <h3 className="text-blue-800 text-xl font-bold mb-3">Follow Us</h3>
-                    <p className="text-blue-600">@kids_learn_code</p>
-                  </div>
-                </TiltCard>
-              </div>
-            </ScrollReveal>
-          </div>
-        </>
+      {mobileOpen && (
+        <div className="figma-mobile-menu">
+          {navItems.map((item) => (
+            <a key={item.href} href={item.href} onClick={() => setMobileOpen(false)}>
+              {item.label}
+            </a>
+          ))}
+          <Link href="/joinus" onClick={() => setMobileOpen(false)}>
+            Join Us
+          </Link>
+        </div>
       )}
 
-    </div>
+      <section className="figma-hero" id="home">
+        <div className="figma-hero-copy">
+
+          <h1>Developing young creators through code.</h1>
+          <p>
+            Kids Learn Code helps children build confidence with Scratch, Python, AI,
+            and game development through free hands-on workshops.
+          </p>
+          <div className="figma-actions">
+            <Link href="/joinus" className="figma-primary">
+              Volunteer with us
+              <ArrowRight size={18} aria-hidden="true" />
+            </Link>
+            <a href="#courses" className="figma-secondary">
+              <PlayCircle size={18} aria-hidden="true" />
+              View courses
+            </a>
+          </div>
+        </div>
+
+        <div className="figma-hero-art" aria-label="Kids Learn Code learning preview">
+          <div className="figma-code-window">
+            <div className="figma-window-dots">
+              <span />
+              <span />
+              <span />
+            </div>
+            <pre>{`if curious:
+  create()
+  share()
+  learn_more()`}</pre>
+          </div>
+
+          <div className="figma-photo-card">
+            <Image
+              src="/Screenshot 2025-04-28 at 7.27.21 AM.png"
+              alt="Kids Learn Code"
+              width={560}
+              height={420}
+              className="figma-photo"
+              priority
+            />
+          </div>
+
+          <div className="figma-floating-card figma-floating-top">
+            <Code2 size={20} aria-hidden="true" />
+            <span>Build real projects</span>
+          </div>
+          <div className="figma-floating-card figma-floating-bottom">
+            <GraduationCap size={20} aria-hidden="true" />
+            <span>Present with confidence</span>
+          </div>
+        </div>
+      </section>
+
+      <section className="figma-stats" id="stats" aria-label="Kids Learn Code impact">
+        {stats.map((stat) => {
+          const Icon = stat.icon;
+
+          return (
+            <article key={stat.label} className="figma-stat-card">
+              <Icon size={24} aria-hidden="true" />
+              <strong>{stat.value}</strong>
+              <span>{stat.label}</span>
+            </article>
+          );
+        })}
+      </section>
+
+      <section className="figma-about" id="about">
+        <div className="figma-section-copy">
+          <div className="figma-pill dark">About Us</div>
+          <h2>Making code feel friendly, creative, and possible.</h2>
+          <p>
+            We aim to engage and ignite kids&apos; passion for coding in an evolving
+            world. Every session is practical, playful, and built around the belief
+            that access to technology education should be free.
+          </p>
+          <div className="figma-check-list">
+            {aboutCards.map((item) => (
+              <div key={item}>
+                <CheckCircle2 size={20} aria-hidden="true" />
+                <span>{item}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="figma-about-panel">
+          <div className="figma-about-number">01</div>
+          <h3>Learn by building</h3>
+          <p>
+            Students turn each concept into something visible: a story, a tool,
+            a game, or a showcase project.
+          </p>
+        </div>
+      </section>
+
+      <section className="figma-courses" id="courses">
+        <div className="figma-section-header">
+          <div className="figma-pill">Courses</div>
+          <h2>Choose a path and start creating.</h2>
+          <p>
+            The Figma design breaks learning into clear course cards, so each learner
+            can quickly understand what they will make and where to begin.
+          </p>
+        </div>
+
+        <div className="figma-course-grid">
+          {courses.map((course) => {
+            const Icon = course.icon;
+
+            return (
+              <article key={course.title} className="figma-course-card">
+                <div className="figma-course-image">
+                  <Image
+                    src={course.image}
+                    alt=""
+                    width={420}
+                    height={260}
+                    className="figma-course-photo"
+                  />
+                </div>
+                <div className="figma-course-body">
+                  <div className="figma-course-icon">
+                    <Icon size={22} aria-hidden="true" />
+                  </div>
+                  <div className="figma-course-tags">
+                    <span>{course.age}</span>
+                    <span>{course.level}</span>
+                  </div>
+                  <h3>{course.title}</h3>
+                  <p>{course.description}</p>
+                  <ul>
+                    {course.outcomes.map((outcome) => (
+                      <li key={outcome}>
+                        <CheckCircle2 size={16} aria-hidden="true" />
+                        {outcome}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+
+      <footer className="figma-footer">
+        <div>
+          <Image
+            src="/Kids Learn Code (130 x 50 px)-2.png"
+            alt="Kids Learn Code"
+            width={130}
+            height={50}
+          />
+          <p>Allowing all students to learn coding for free.</p>
+        </div>
+        <Link href="/joinus" className="figma-primary">
+          Register interest
+          <ArrowRight size={18} aria-hidden="true" />
+        </Link>
+      </footer>
+    </main>
   );
 }
