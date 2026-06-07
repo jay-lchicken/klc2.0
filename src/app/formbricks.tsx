@@ -10,7 +10,7 @@ export default function FormbricksProvider() {
 
   useEffect(() => {
     formbricks.setup({
-      environmentId: "cmj2vl1zv0007kc01mvkwrqqh",
+      environmentId: "cmnyn4ysh0009o6017m18pxid",
       appUrl: "https://forms.kidslearncode.org", // use PUBLIC_URL if you are using multi-domain setup, otherwise use WEBAPP_URL
     });
   }, []);
