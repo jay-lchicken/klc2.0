@@ -198,7 +198,7 @@ button {
 
 .figma-brand img,
 .figma-footer img {
-  width: 130px;
+  width: 100px;
   height: auto;
   object-fit: contain;
 }

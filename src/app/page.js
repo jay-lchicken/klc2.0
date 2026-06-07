@@ -85,10 +85,10 @@ export default function Home() {
       <header className="figma-nav">
         <Link href="/" className="figma-brand" aria-label="Kids Learn Code home">
           <Image
-            src="/Kids Learn Code (130 x 50 px)-2.png"
+            src="/logov2.png"
             alt="Kids Learn Code"
-            width={130}
-            height={50}
+            width={100}
+            height={30}
             priority
           />
         </Link>
