@@ -231,11 +231,8 @@ export default function Home() {
       <section className="figma-courses" id="courses">
         <div className="figma-section-header">
           <div className="figma-pill">Courses</div>
-          <h2>Choose a path and start creating.</h2>
-          <p>
-            The Figma design breaks learning into clear course cards, so each learner
-            can quickly understand what they will make and where to begin.
-          </p>
+          <h2>Explore our different courses.</h2>
+
         </div>
 
         <div className="figma-course-grid">
