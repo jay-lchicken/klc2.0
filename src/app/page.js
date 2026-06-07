@@ -31,10 +31,11 @@ const navItems = [
   { label: "About", href: "#about" },
   { label: "Courses", href: "#courses" },
   { label: "Impact", href: "#stats" },
+  {label: "Track your hours",href: "https://p2.kidslearncode.org"}
 ];
 
 const stats = [
-  { value: "200+", label: "Students taught", icon: Users },
+  { value: "300+", label: "Students taught", icon: Users },
   { value: "10+", label: "Schools reached", icon: School },
   { value: "70%", label: "Enjoyment rate", icon: Sparkles },
   { value: "4", label: "Years running", icon: GraduationCap },
@@ -164,7 +165,7 @@ export default function Home() {
 
           <div className="figma-photo-card">
             <Image
-              src="/Screenshot 2025-04-28 at 7.27.21 AM.png"
+              src="/rulangworkshop.png"
               alt="Kids Learn Code"
               width={560}
               height={420}

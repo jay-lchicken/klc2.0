@@ -111,10 +111,7 @@ export default function JoinUs() {
 
       <section className="join-hero">
         <div className="join-hero-copy">
-          <div className="figma-pill">
-            <Sparkles size={16} aria-hidden="true" />
-            Join the volunteer team
-          </div>
+
           <h1>Help kids discover code with confidence.</h1>
           <p>
             If you are a Secondary School student who wants to make a difference,
@@ -143,10 +140,7 @@ export default function JoinUs() {
               service portfolio while giving back.
             </p>
           </div>
-          <div className="join-panel-card join-panel-small top">
-            <CalendarCheck size={22} aria-hidden="true" />
-            <strong>Flexible events</strong>
-          </div>
+
           <div className="join-panel-card join-panel-small bottom">
             <MessageCircle size={22} aria-hidden="true" />
             <strong>Student-led team</strong>

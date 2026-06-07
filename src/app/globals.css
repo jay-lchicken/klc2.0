@@ -418,7 +418,6 @@ button {
   color: var(--klc-blue-dark);
   background: rgba(255, 255, 255, 0.95);
   box-shadow: 0 24px 62px rgba(0, 35, 59, 0.22);
-  animation: floatSoft 5s ease-in-out infinite;
 }
 
 .figma-window-dots {
